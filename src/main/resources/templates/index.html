@@ -23,11 +23,10 @@
 </header>
 
 <!--=============== MAIN ===============-->
-<main class="main data__TC">
+<main class="main">
   <section class="home section" id="home">
     <div class="container total__header">
-      <span class="total__confirmed">Total confirmed: </span>
-      <span th:text="${totalReportedCases}" th:remove="tag"></span>
+      <p class="total__confirmed">Total confirmed: <span th:text="${totalReportedCases}"> 0 </span></p>
     </div>
   </section>
   <section class="home section" id="home">
