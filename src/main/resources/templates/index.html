@@ -1,60 +1,114 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'index')}">
+<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Coronavirus Tracker Application</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <!--=============== BOXICONS ===============-->
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" type="text/css" href="/css/swiper-bundle.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+
+</head>
 
 <body>
+<!--=============== HEADER ===============-->
+<header class="header">
+  <nav class="nav container">
+    <a href="#" class="nav__logo">Corona Virus Tracker</a>
+  </nav>
+</header>
 
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="/lang-logo.png">
-    </a>
-    <h1>Getting Started with Java on Heroku</h1>
-    <p>This is a sample Java application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-java"><span class="glyphicon glyphicon-flash"></span> Getting Started with Java</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/java-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-  </div>
-</div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-java" class="alert-link">Getting Started with Java on Heroku</a> tutorial.
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-      <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/java-getting-started">Heroku Button</a> on the repository.</li>
+<!--=============== MAIN ===============-->
+<main class="main data__TC">
+  <section class="home section" id="home">
+    <div class="container total__header">
+      <span class="total__confirmed">Total confirmed: </span>
+      <span th:text="${totalReportedCases}" th:remove="tag"></span>
+    </div>
+  </section>
+  <section class="home section" id="home">
+    <div class="container__table">
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-1">State</div>
+          <div class="col col-2">Country</div>
+          <div class="col col-3">County</div>
+          <div class="col col-4">Total Confirmed Cases</div>
+          <div class="col col-5">Changes Since Last Day</div>
 
-        <li>When Heroku received the source code, it fetched all the dependencies in the <a href="https://github.com/heroku/java-getting-started/blob/main/pom.xml">pom.xml</a>, creating a slug.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
+        </li>
+        <section class="data__seperate">
+          <li class="table-row" th:each="locationStat : ${locationStats}">
+            <div class="col col-2" data-label="Country" th:text="${locationStat.country}"></div>
+            <div class="col col-1" data-label="State" th:text="${locationStat.state}"></div>
+            <div class="col col-3" data-label="County" th:text="${locationStat.county}"></div>
+            <div class="col col-4" data-label="Total Confirmed Cases"
+                 th:text="${locationStat.latestTotalCases}">0
+            </div>
+            <div class="col col-5" data-label="Changes Since Last Day"
+                 th:text="${locationStat.diffFromPrevDay}">
+              0
+            </div>
+        </section>
+        </li>
       </ul>
     </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
-      <ul>
-        <li>If you are following the <a href="https://devcenter.heroku.com/articles/getting-started-with-java">Getting Started</a> guide, then please head back to the tutorial and follow the next steps!</li>
-        <li>If you deployed this app by deploying the Heroku Button, then in a command line shell, run:</li>
-        <ul>
-          <li><code>git clone https://github.com/heroku/java-getting-started.git</code> - this will create a local copy of the source code for the app</li>
-          <li><code>cd java-getting-started</code> - change directory into the local source code repository</li>
-          <li><code>heroku git:remote -a &lt;your-app-name></code> - associate the Heroku app with the repository</li>
-          <li>You'll now be set up to run the app locally, or <a href="https://devcenter.heroku.com/articles/getting-started-with-java#push-local-changes">deploy changes</a> to Heroku</li>
-        </ul>
-      </ul>
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-java">Getting Started with Java on Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-java">Deploying Java Apps on Heroku</a></li>
-      </ul>
-    </div>
-  </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
+  </section>
+</main>
+
+<!--=============== FOOTER ===============-->
+<footer class="footer">
+  <div class="footer__container container">
+    <h1 class="footer__title">Jonathan</h1>
+
+    <ul class="footer__list">
+      <li>
+        <a href="https://jonathangonzalez.tech/#about" target="_blank" class="footer__link">About_me</a>
+      </li>
+      <li>
+        <a href="https://jonathangonzalez.tech/#skills" target="_blank" class="footer__link">Skills</a>
+      </li>
+      <li>
+        <a href="https://jonathangonzalez.tech/#work" target="_blank" class="footer__link">Projects</a>
+      </li>
+    </ul>
+
+    <ul class="footer__social">
+      <a href="https://www.linkedin.com/in/jonathan-gonzalez-delacruz/" target="_blank"
+         class="footer__social-link">
+        <i class='bx bxl-linkedin-square'></i>
+      </a>
+      <a href="https://github.com/Gjonathan252" target="_blank" class="footer__social-link">
+        <i class='bx bxl-github'></i>
+      </a>
+      <a href="https://twitter.com/ign_alpha" target="_blank" class="footer__social-link">
+        <i class='bx bxl-twitter'></i>
+      </a>
+
+    </ul>
+
+    <span class="footer__copy">
+                &#169; Jonathan Gonzalez Delacruz 2022
+            </span>
   </div>
-</div>
+</footer>
+
+<!--=============== SCROLLREVEAL ===============-->
+<script type="text/javascript" src="/js/scrollreveal.min.js"></script>
+
+<!--=============== SWIPER JS ===============-->
+<script type="text/javascript" src="/js/swiper-bundle.min.js"></script>
+
+<!--=============== MIXITUP FILTER ===============-->
+<script type="text/javascript" src="/js/mixitup.min.js"></script>
+
+<!--=============== MAIN JS ===============-->
+<script type="text/javascript" src="/js/main.js"></script>
 
 </body>
+
 </html>
