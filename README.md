@@ -23,7 +23,7 @@ The application provides the most recent corona virus updates provided by Center
 Everytime the application is ran a new data pull is raned and converted. If a large group was to use this application at the same time it can cause errors and failuers. What should be done is remotly saving statically the data once a day. This way the data is not pulled everytime the data is ran. Just reference from the static data daily. This can be done by having a master/dev version which runs every hour or day and changes a static file to the data it pulled. Then when the user runs the application it is only loading the static version of the website without needing to pull the data everytime. 
 
 
-![Alt text](https://i.imgur.com/ErmhAkV.png)
+![Alt text](https://i.imgur.com/WXVjxCZ.png)
 
 
 ** This application is not intended to provide information. It is intended to demonstrate proof of work. I dont have authorization to use the data provided. This application is not maintained and can provide errors live data. The application should not be used for information. **
