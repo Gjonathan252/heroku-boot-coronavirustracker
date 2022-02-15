@@ -43,6 +43,7 @@
   --tiny-font-size: .62rem;
 
   /*========== Font weight ==========*/
+  --font-small: 400;
   --font-medium: 500;
   --font-semibold: 600;
 
@@ -73,8 +74,9 @@ body {
 
 h1, h2, h3 {
   color: var(--title-color);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-medium);
 }
+
 ul {
   list-style: none;
 }
@@ -127,6 +129,14 @@ a {
 .nav__logo:hover {
   color: var(--nav-color-alt);
 }
+.nav__link {
+  padding-left: 10px;
+  color: var(--nav-color-alt);
+}
+.nav__link:hover {
+  color: var(--nav-color);
+}
+
 /* Change background header */
 
 /*=============== SCROLL BAR ===============*/

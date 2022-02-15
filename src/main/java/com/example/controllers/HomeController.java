@@ -22,12 +22,26 @@ public class HomeController {
             List<LocationStats> allStats = coronaVirusDataService.getAllStats();
             int totalReportedCases = allStats.stream().mapToInt(LocationStats::getLatestTotalCases).sum();
             int totalNewCases = allStats.stream().mapToInt(LocationStats::getDiffFromPrevDay).sum();
-//        int totalReportedCases = allStats.stream().mapToInt(stat -> stat.getLatestTotalCases()).sum();
-//        int totalNewCases = allStats.stream().mapToInt(stat -> stat.getDiffFromPrevDay()).sum();
             model.addAttribute("locationStats", allStats);
             model.addAttribute("totalReportedCases", totalReportedCases);
             model.addAttribute("totalNewCases", totalNewCases);
             return "index";
+        }catch (Exception e) {
+            model.addAttribute("message", "unable to get data");
+            return "error";
+        }
+    }
+
+    @GetMapping("/global")
+    public String global(Model model) throws Exception{
+        try {
+            List<LocationStats> allGlobalStats = coronaVirusDataService.getAllGlobalStats();
+            int totalReportedCases = allGlobalStats.stream().mapToInt(LocationStats::getLatestTotalCases).sum();
+            int totalNewCases = allGlobalStats.stream().mapToInt(LocationStats::getDiffFromPrevDay).sum();
+            model.addAttribute("locationStats", allGlobalStats);
+            model.addAttribute("totalReportedCases", totalReportedCases);
+            model.addAttribute("totalNewCases", totalNewCases);
+            return "global";
         }catch (Exception e) {
             model.addAttribute("message", "unable to get data");
             return "error";
