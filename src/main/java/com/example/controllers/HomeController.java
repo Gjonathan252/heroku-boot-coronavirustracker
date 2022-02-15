@@ -27,7 +27,6 @@ public class HomeController {
             model.addAttribute("locationStats", allStats);
             model.addAttribute("totalReportedCases", totalReportedCases);
             model.addAttribute("totalNewCases", totalNewCases);
-
             return "index";
         }catch (Exception e) {
             model.addAttribute("message", "unable to get data");
